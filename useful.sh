@@ -14,3 +14,7 @@ function mycopy() {
     cd -
     echo 'done'
 }
+
+function mygradle() {
+    docker run --rm -it -v "$PWD":/home/gradle/project -w /home/gradle/project gradle gradle "$1"
+}
