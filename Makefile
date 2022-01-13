@@ -1,5 +1,11 @@
-tom:
-	docker run --rm -it -v "${PWD}:/root/code" -w /root/code -p 8080:8080 tomcat:10-jdk8-corretto bash
+.PHONY: all
+all: clean build
+	docker run --rm -it -v "${PWD}/build/libs/ROOT.war:/usr/local/tomcat/webapps/ROOT.war" -p 8080:8080 tomcat:10-jdk8-corretto
 
-java:
-	docker run --rm -it -v "${PWD}:/home/code" java:8-jdk bash
+.PHONY: clean
+clean:
+	rm -rf build
+
+.PHONY: build
+build:
+	./gradlew build
